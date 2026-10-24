@@ -1,0 +1,72 @@
+.app-root[data-canvas-theme="dark"] .provider-config-dialog,
+.app-root[data-canvas-theme="dark"] .provider-config-dialog__header,
+.app-root[data-canvas-theme="dark"] .provider-config-dialog__footer,
+.app-root[data-canvas-theme="dark"] .provider-field__control  {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}@media (max-width: 1023px) {
+
+  .provider-config-dialog {
+    max-height: calc(100dvh - 2rem);
+  }
+}@media (max-width: 767px) {
+
+  .provider-config-dialog {
+    max-height: 100%;
+    border-radius: 12px;
+  }
+
+  .provider-config-dialog__header,
+  .provider-config-dialog__footer {
+    padding: 0.95rem 1rem;
+  }
+
+  .provider-config-dialog__footer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .provider-config-dialog__body {
+    padding: 1rem;
+  }
+}@media (max-width: 520px) {
+
+  .provider-config-dialog__header h2 {
+    font-size: 1.22rem;
+  }
+}.app-root .provider-config-dialog--simple .provider-field__control {
+  min-height: var(--ui-control-height);
+  height: var(--ui-control-height);
+  padding: 0 var(--ui-control-padding);
+}.app-root :is(.provider-field) {
+  gap: 0;
+}.app-root .provider-config-dialog--simple .provider-config-dialog__header,
+.app-root .provider-config-dialog--simple .provider-config-dialog__footer {
+  padding: var(--ui-space-4) var(--ui-space-5);
+}.app-root .provider-config-dialog--simple .provider-config-dialog__body {
+  gap: var(--ui-space-4);
+  padding: 0 var(--ui-space-5) var(--ui-space-5);
+}.app-root .provider-config-dialog--simple .provider-config-dialog__footer .primary-action {
+  height: var(--ui-control-height);
+  min-height: var(--ui-control-height);
+  font-size: var(--ui-font-body);
+}.app-root .provider-config-dialog--simple {
+  width: min(520px, calc(100vw - 40px));
+  max-height: calc(100dvh - 40px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--paper-panel);
+  color: var(--ink);
+  box-shadow: 0 16px 64px rgb(0 0 0 / .35);
+}.provider-config-dialog:not([open]) { display: none; }.provider-config-dialog::backdrop { background: rgb(0 0 0 / .45); }.provider-config-dialog > form { display: flex; flex-direction: column; max-height: calc(100dvh - 42px); }.app-root .provider-config-dialog--simple .provider-config-dialog__header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--line); background: transparent; box-shadow: none; }.provider-config-dialog__header h2 { margin: 0; }.app-root .provider-config-dialog__close { border: 0; background: transparent; color: var(--muted-ink); box-shadow: none; cursor: pointer; }.provider-config-dialog__close:hover:not(:disabled) { background: var(--surface-hover); color: var(--ink); }.app-root .provider-config-dialog--simple .provider-config-dialog__body { min-height: 0; padding: 20px; overflow-y: auto; overscroll-behavior: contain; }.settings-section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; }.settings-section-title h3 { margin: 0; font-size: var(--ui-font-body); font-weight: 600; }.settings-section-title > span, .settings-hint, .settings-source { color: var(--muted-ink); font-size: var(--ui-font-caption); line-height: 1.6; margin: 0; }.settings-fields { display: grid; gap: 12px; min-width: 0; padding: 0; margin: 0; border: 0; }.settings-fields:disabled { opacity: .6; }.settings-row { display: grid; grid-template-columns: 76px minmax(0, 1fr); align-items: center; gap: 14px; color: var(--ink); font-size: var(--ui-font-body); }.app-root .settings-row .provider-field__control { width: 100%; min-width: 0; min-height: var(--ui-control-height); padding: 0 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface-input); color: var(--ink); font-family: var(--font-ui); font-size: var(--ui-font-body); font-weight: 400; box-shadow: none; }.settings-row .provider-field__control::placeholder { color: var(--muted-ink); }.settings-key-status, .settings-key-entry { display: flex; min-width: 0; align-items: center; gap: 12px; }.settings-key-status { justify-content: space-between; min-height: var(--ui-control-height); }.settings-key-status > span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted-ink); }.settings-key-entry .provider-field__control { flex: 1; }.settings-text-button { flex-shrink: 0; min-height: var(--ui-control-height); padding: 0 8px; border: 0; border-radius: 5px; background: transparent; color: var(--ink); font-size: var(--ui-font-caption); cursor: pointer; }.settings-text-button:hover { background: var(--surface-hover); }.settings-source { margin-top: 12px; }.settings-error { margin: 16px 0 0; color: var(--danger); font-size: var(--ui-font-caption); line-height: 1.6; overflow-wrap: anywhere; }.app-root .provider-config-dialog--simple .provider-config-dialog__footer { display: flex; align-items: center; justify-content: flex-end; gap: 16px; padding: 14px 20px; border-top: 1px solid var(--line); background: transparent; box-shadow: none; }.app-root .provider-config-dialog--simple .provider-config-dialog__footer .primary-action { min-width: 88px; padding: 0 20px; margin: 0; }.provider-config-dialog :is(button, summary):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }@media (max-width: 600px) {
+  .app-root .provider-config-dialog--simple { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
+  .provider-config-dialog > form { max-height: calc(100dvh - 26px); }
+  .settings-row { grid-template-columns: 1fr; gap: 6px; }
+  .settings-row--key { gap: 0; }
+  .settings-section-title { align-items: center; }
+  .settings-section-title > span { font-size: 11px; }
+  .app-root .settings-row .provider-field__control { font-size: 16px; }
+  .settings-text-button { min-height: 44px; }
+}

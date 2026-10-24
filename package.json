@@ -1,0 +1,93 @@
+{
+  "name": "insboard",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "main": "apps/desktop/dist/main.js",
+  "packageManager": "pnpm@9.14.2",
+  "description": "Image generation workspace for macOS and the web.",
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"pnpm api:dev\" \"pnpm web:dev\"",
+    "api:dev": "pnpm --filter @insboard/api dev",
+    "web:dev": "pnpm --filter @insboard/web dev",
+    "build": "pnpm --filter @insboard/shared build && pnpm --filter @insboard/web build && pnpm --filter @insboard/api build && pnpm --filter @insboard/desktop build",
+    "typecheck": "pnpm --filter @insboard/shared typecheck && pnpm --filter @insboard/web typecheck && pnpm --filter @insboard/api typecheck && pnpm --filter @insboard/desktop typecheck && tsc -p tests/tsconfig.json",
+    "start": "pnpm --filter @insboard/api start",
+    "desktop:dev": "pnpm desktop:package && open release/mac-arm64/InsBoard.app",
+    "desktop:icon": "node apps/desktop/scripts/build-icon.mjs",
+    "desktop:package": "pnpm build && pnpm desktop:icon && electron-builder --mac dir --arm64 && pnpm desktop:verify",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "test:unit": "pnpm --filter @insboard/shared build && node scripts/test.mjs unit",
+    "test:api": "pnpm --filter @insboard/shared build && node scripts/test.mjs api",
+    "test": "pnpm --filter @insboard/shared build && node scripts/test.mjs",
+    "check": "pnpm check:architecture && pnpm typecheck && pnpm test && pnpm build",
+    "desktop:verify": "node scripts/verify-desktop.mjs"
+  },
+  "dependencies": {
+    "@insboard/api": "workspace:^"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.0",
+    "@types/node": "^24.12.2",
+    "concurrently": "^9.1.2",
+    "electron": "^40.0.0",
+    "electron-builder": "^26.0.12",
+    "typescript": "^5.8.3",
+    "@electron/asar": "3.4.1"
+  },
+  "build": {
+    "appId": "com.uzerone.insboard",
+    "productName": "InsBoard",
+    "asar": true,
+    "npmRebuild": false,
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "apps/desktop/resources"
+    },
+    "files": [
+      "apps/desktop/dist/**/*",
+      "apps/api/dist/**/*",
+      "apps/web/dist/**/*",
+      "packages/shared/dist/**/*",
+      "package.json",
+      "node_modules/**/*",
+      "!node_modules/@img/sharp-darwin-x64/**/*",
+      "!node_modules/@img/sharp-linux*/**/*",
+      "!node_modules/@img/sharp-win32*/**/*",
+      "!node_modules/@img/sharp-wasm32/**/*",
+      "!node_modules/@img/sharp-libvips-darwin-x64/**/*",
+      "!node_modules/@img/sharp-libvips-linux*/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": ".codex-temp/desktop-icon/Assets.car",
+        "to": "Assets.car"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.graphics-design",
+      "icon": ".codex-temp/desktop-icon/InsBoard.icns",
+      "extendInfo": {
+        "CFBundleIconName": "InsBoard"
+      },
+      "darkModeSupport": true,
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "identity": "-"
+    },
+    "afterPack": "apps/desktop/scripts/rebuild-packaged-native.mjs"
+  }
+}
